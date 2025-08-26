@@ -75,7 +75,7 @@ def syn_test_verilog(save_path: Path, X, Y, N=None, softmax=False):
         #     continue
         try:
             inp, out = trace_model(model, solver_options={'hard_dc': 2}, hwconf=HWConfig(1,-1,-1))
-            solution = comb_trace(inp[0], out[0])
+            solution = comb_trace(inp, out)
             solution.save_binary('/tmp/emulator.bin')  # <- This file
             verilog_model = VerilogModel(
                 solution,
