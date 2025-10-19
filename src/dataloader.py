@@ -8,15 +8,15 @@ from keras import ops
 
 
 def get_data(data_path: Path, n_constituents: int, ptetaphi: bool):
-
     import h5py as h5
-    with h5.File(data_path / '150c-train.h5') as f:
-        X_train_val = np.array(f['feature'][:, :n_constituents])  # type: ignore
-        y_train_val = np.array(f['label'])
-    with h5.File(data_path / '150c-test.h5') as f:
-        X_test = np.array(f['feature'][:, :n_constituents])  # type: ignore
-        y_test = np.array(f['label'])
-    labels = 'gqWZt'
+
+    with h5.File(data_path / "150c-train.h5") as f:
+        X_train_val = np.array(f["feature"][:, :n_constituents])  # type: ignore
+        y_train_val = np.array(f["label"])
+    with h5.File(data_path / "150c-test.h5") as f:
+        X_test = np.array(f["feature"][:, :n_constituents])  # type: ignore
+        y_test = np.array(f["label"])
+    labels = "gqWZt"
 
     X_train_val = X_train_val.astype(np.float32)
     y_train_val = y_train_val.astype(np.int32)

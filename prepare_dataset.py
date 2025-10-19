@@ -7,31 +7,31 @@ import argparse
 
 
 def load(path: Path):
-    with h5.File(path, 'r') as f:
-        _label = f['jets'][:, -6:-1]  # type: ignore
+    with h5.File(path, "r") as f:
+        _label = f["jets"][:, -6:-1]  # type: ignore
         assert np.all(np.sum(_label, axis=1) == 1)  # type: ignore
         label = np.argmax(_label, axis=1)  # type: ignore
-        feature = np.array(f['jetConstituentList']).astype(np.float16)
+        feature = np.array(f["jetConstituentList"]).astype(np.float16)
     return feature, label
 
 
 def main(inp: str, out: str, jobs: int):
     root = Path(inp)
-    paths = list(root.glob('*.h5'))
+    paths = list(root.glob("*.h5"))
     with Pool(jobs) as p:
         r = list(tqdm(p.imap(load, paths), total=len(paths)))
         features, labels = zip(*r)
         feature, label = np.concatenate(features), np.concatenate(labels)
-    with h5.File(out, 'w') as f:
-        f.create_dataset('feature', data=feature, compression='lzf')
-        f.create_dataset('label', data=label, compression='lzf')
+    with h5.File(out, "w") as f:
+        f.create_dataset("feature", data=feature, compression="lzf")
+        f.create_dataset("label", data=label, compression="lzf")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--inp', type=str, required=True)
-    parser.add_argument('-o', '--out', type=str, required=True)
-    parser.add_argument('-j', '--jobs', type=int, default=8)
+    parser.add_argument("-i", "--inp", type=str, required=True)
+    parser.add_argument("-o", "--out", type=str, required=True)
+    parser.add_argument("-j", "--jobs", type=int, default=8)
     args = parser.parse_args()
     main(args.inp, args.out, args.jobs)
 
