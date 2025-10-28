@@ -16,7 +16,7 @@ bash prepare_dataset.sh
 
 ### Obtaining the models
 
-The models shown in the tables in the papers are included in `offline_models.tar.gz`.
+The models shown in the tables in the papers are included in `official_models.tar.gz`.
 You can extract them with:
 
 ```bash
@@ -32,11 +32,13 @@ KERAS_BACKEND=jax python jet_classifier.py -c configs/<config_file> -r train
 
 ### Evaluation on test set, convert to Verilog
 
-The outputs are already included in the `offline_models.tar.gz`, but you can validate them with:
+The outputs are already included in the `official_models.tar.gz`, but you can validate them with:
 
 ```bash
 KERAS_BACKEND=jax python jet_classifier.py -c configs/<config_file> -r test verilog
 ```
+
+The Verilator may require a newer C++ compiler. We tested our code with g++ 15.1.1.
 
 ### Synthesis
 
@@ -44,7 +46,7 @@ Due to size consideration, we removed the Vivado project files, but only include
 
 ```bash
 cd <output_directory>/<model_directory>/da4ml_verilog_prjs/<verilog_project>
-vivado -mode batch -source synth_prj.tcl
+vivado -mode batch -source build_prj.tcl
 ```
 
 ### Generate json report
