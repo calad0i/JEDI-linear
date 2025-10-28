@@ -47,6 +47,9 @@ Due to size consideration, we removed the Vivado project files, but only include
 ```bash
 cd <output_directory>/<model_directory>/da4ml_verilog_prjs/<verilog_project>
 vivado -mode batch -source build_prj.tcl
+
+# Starting v0.5.x, the da4ml generated projects layout changed, and the synthesis script is now named build_vivado_prj.tcl
+# vivado -mode batch -source build_vivado_prj.tcl
 ```
 
 ### Generate json report
