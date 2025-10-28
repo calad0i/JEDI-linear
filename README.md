@@ -20,7 +20,7 @@ The models shown in the tables in the papers are included in `offline_models.tar
 You can extract them with:
 
 ```bash
-tar -xvf offline_models.tar.gz
+tar -xvf official_models.tar.gz
 ```
 
 If you want to retrain the models, you can do so with the following commands.
